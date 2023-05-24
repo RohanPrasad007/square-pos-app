@@ -117,15 +117,15 @@ const getData = (items) => {
     row.push(element.qty);
     row.push(element.mrp);
     row.push(element.discount);
-    row.push(discountePrice);
-    row.push(youSave);
-    row.push(amount);
+    row.push(discountePrice.toFixed(2));
+    row.push(youSave.toFixed(2));
+    row.push(amount.toFixed(2));
 
     data.push(row);
     totalAmount = totalAmount + amount;
     totalSave = totalSave + youSave;
   });
-  return [data, totalAmount, totalSave];
+  return [data, totalAmount.toFixed(2), totalSave.toFixed(2)];
 };
 
 export default generatePDF;
