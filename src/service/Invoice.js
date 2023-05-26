@@ -7,7 +7,7 @@ function generatePDF(bill) {
   // create a new PDF document
   const doc = new jsPDF();
 
-  doc.addImage("/logo.PNG", "PNG", 15, 10, 100, 25);
+  doc.addImage("./assets/logo.png", "PNG", 15, 10, 100, 20);
   doc.setFontSize(10);
   doc.text("Invoice", 195, 45, null, null, "right");
   doc.text(`Invoice No: ${bill.invoiceNo}`, 195, 50, null, null, "right");

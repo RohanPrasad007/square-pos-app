@@ -9,10 +9,10 @@ let mainWindow;
 
 const createWindow = async () => {
   // Create the browser window.
-  //   const iconPath = path.join(__dirname, "/logo_white.png");
+  const iconPath = path.join(__dirname, "./assets/icon.png");
 
   mainWindow = new BrowserWindow({
-    // icon: iconPath,
+    icon: iconPath,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true,
