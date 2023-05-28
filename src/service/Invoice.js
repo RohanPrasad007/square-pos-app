@@ -35,13 +35,11 @@ function generatePDF(bill) {
   // define the table headers and data
   const headers = [
     "Sr No",
-    "Part No",
-    "Discription",
-    "Make",
+    "Description",
     "QTY",
-    "MPR",
+    "MRP",
     "Discount",
-    "Discount Price",
+    "Discounted Price",
     "You Save",
     "Amount",
   ];
@@ -56,35 +54,27 @@ function generatePDF(bill) {
     head: [headers],
     body: data,
     // showFoot: "lastPage",
-    foot: [["", "", "Total", "", "", "", "", "", `${save}`, `${amount}`]],
+    foot: [["", "", "Total", "", "", "", `${save}`, `${amount}`]],
     startY: y,
     headStyles: {
-      fillColor: "#ff0000",
+      fillColor: "#E75B4E",
       textColor: "#ffffff",
     },
     footStyles: {
-      fillColor: "#ff0000",
+      fillColor: "#316789",
       textColor: "#ffffff",
     },
   });
-  y += 10;
-  const totalText = `You Save Rupees (in words): Rupees ${numWords(
-    Math.round(save)
-  )}`;
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(12);
-  doc.setTextColor("#ff0000");
-  doc.text(totalText, 15, doc.autoTable.previous.finalY + 15);
 
   // Add text to the bottom of the PDF
-  const thankYou = "Thank you for giving us the opportunity to Serve You.";
+  const thankYou = "Glad To Serve You.";
   doc.setFont("helvetica", "bold");
   doc.setFontSize(12);
   doc.setTextColor("#000000");
   doc.text(
     thankYou,
     doc.internal.pageSize.getWidth() / 2,
-    doc.autoTable.previous.finalY + 40,
+    doc.autoTable.previous.finalY + 10,
     { align: "center" }
   );
 
@@ -111,10 +101,8 @@ const getData = (items) => {
 
     let row = [];
     row.push(i + 1);
-    row.push(element.partNo);
     row.push(element.description);
-    row.push(element.make);
-    row.push(element.qty);
+    row.push(element.quantity);
     row.push(element.mrp);
     row.push(element.discount);
     row.push(discountePrice.toFixed(2));

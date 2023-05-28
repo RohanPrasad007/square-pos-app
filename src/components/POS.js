@@ -25,9 +25,9 @@ function POS() {
     alert("do you save");
     setLoading(true);
     items.pop();
-    let paymentLink = await window.api.makeOrder(items);
+    let [paymentLink, invoiceNo] = await window.api.makeOrder(items);
     const bill = {
-      invoiceNo: "INV-001",
+      invoiceNo: invoiceNo,
       date: new Date(),
       customer: {
         name: "Raj",
@@ -83,12 +83,24 @@ function POS() {
             nextField = "quantity";
             break;
           case "quantity":
+            if (e.target.value === "") {
+              items[rowIndex]["quantity"] = 0;
+              setItems([...items]);
+            }
             nextField = "mrp";
             break;
           case "mrp":
+            if (e.target.value === "") {
+              items[rowIndex]["mrp"] = 0;
+              setItems([...items]);
+            }
             nextField = "discount";
             break;
           case "discount":
+            if (e.target.value === "") {
+              items[rowIndex]["discount"] = 0;
+              setItems([...items]);
+            }
             nextField = "amount";
             break;
           case "amount":

@@ -146,7 +146,7 @@ const createInvoice = async (orderId) => {
       response.result.invoice.id,
       response.result.invoice.version
     );
-    return payemntLink;
+    return [payemntLink, invoiceNumber];
   } catch (error) {
     console.log(error);
   }
@@ -159,32 +159,37 @@ ipcMain.handle("makeOrder", async (event, invoice) => {
   const discounts = [];
 
   invoice.forEach((element) => {
+    let appliedDiscounts = [];
+    if (element.discount !== 0) {
+      const discount = {
+        uid: element.discount,
+        name: element.discount,
+        type: "FIXED_PERCENTAGE",
+        percentage: element.discount,
+        scope: "LINE_ITEM",
+      };
+      discounts.push(discount);
+
+      appliedDiscounts = [
+        {
+          discountUid: element.discount,
+        },
+      ];
+    }
+
     let item = {
       name: element.description,
       quantity: element.quantity,
       metadata: {
         partNo: "ME234",
       },
-      appliedDiscounts: [
-        {
-          discountUid: element.discount,
-        },
-      ],
+      appliedDiscounts: appliedDiscounts,
       basePriceMoney: {
         amount: element.mrp * 100,
         currency: "USD",
       },
     };
     lineItem.push(item);
-
-    let discount = {
-      uid: element.discount,
-      name: element.discount,
-      type: "FIXED_PERCENTAGE",
-      percentage: element.discount,
-      scope: "LINE_ITEM",
-    };
-    discounts.push(discount);
   });
 
   try {
@@ -198,8 +203,10 @@ ipcMain.handle("makeOrder", async (event, invoice) => {
       idempotencyKey: idempotencyKey,
     });
 
-    const paymentLink = await createInvoice(response.result.order.id);
-    return paymentLink;
+    const [paymentLink, invoiceNumber] = await createInvoice(
+      response.result.order.id
+    );
+    return [paymentLink, invoiceNumber];
   } catch (error) {
     console.log(error);
   }
