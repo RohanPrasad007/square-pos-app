@@ -9,9 +9,27 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #effdf5;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.motion {
+  margin-left: 6em;
+  margin-top: 6em;
+  position: absolute;
+  animation: doit 12s infinite linear;
+  transform-origin: center;
+}
+
+@keyframes doit {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(3600deg);
+  }
 }

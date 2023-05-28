@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import generatePDF from "../service/Invoice";
-import { Watch } from "react-loader-spinner";
+import Loader from "./Loader";
 
 function POS() {
   const [items, setItems] = useState([
@@ -263,23 +263,10 @@ function POS() {
         </table>
         <div className="bg-[#316789] text-white text-xl py-4 px-6 flex justify-end gap-20 items-center">
           <div>Total Amount</div>
-          <div>{totalAmount.toFixed(2)}</div>
+          <div>${totalAmount.toFixed(2)}</div>
         </div>
       </div>
-      {loading && (
-        <div className="flex justify-center items-center absolute top-0 left-0 w-screen	h-screen bg-gray-200 opacity-70">
-          <Watch
-            height="80"
-            width="80"
-            radius="48"
-            color="#4fa94d"
-            ariaLabel="watch-loading"
-            wrapperStyle={{}}
-            wrapperClassName=""
-            visible={true}
-          />
-        </div>
-      )}
+      {loading && <Loader />}
     </div>
   );
 }
