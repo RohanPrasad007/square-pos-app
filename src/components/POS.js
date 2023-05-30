@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import generatePDF from "../service/Invoice";
 import Loader from "./Loader";
-import { Dialog } from "@mui/material";
+import { Autocomplete, Dialog, InputAdornment, TextField } from "@mui/material";
 import Alert from "./Alert";
+import SearchIcon from "@mui/icons-material/Search";
+import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 
 function POS() {
   const [items, setItems] = useState([
@@ -19,6 +21,25 @@ function POS() {
   const [activeRowIndex, setActiveRowIndex] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
   const [openAlert, setOpenAlert] = useState(false);
+  const [selectedCustomer, setSelectedCustomer] = useState(null);
+
+  const customers = [
+    {
+      name: "John",
+      last_name: "Doe",
+      phone: "123-456-7890",
+    },
+    {
+      name: "Jane",
+      last_name: "Smith",
+      phone: "987-654-3210",
+    },
+    {
+      name: "Alice",
+      last_name: "Johnson",
+      phone: "555-123-4567",
+    },
+  ];
 
   useEffect(() => {
     document.getElementById("cell-0-description").focus();
@@ -177,8 +198,46 @@ function POS() {
     setOpenAlert(false);
   };
 
+  const handleCustomerChange = (event, value) => {
+    setSelectedCustomer(value);
+  };
+
   return (
     <div className="p-4">
+      <div className="flex items-center gap-4 pb-8 pt-4">
+        <div className="flex-1">
+          <Autocomplete
+            id="search-input"
+            options={customers}
+            getOptionLabel={(option) =>
+              `${option.name} ${option.last_name} - ${option.phone}`
+            }
+            value={selectedCustomer}
+            onChange={handleCustomerChange}
+            renderInput={(params) => (
+              <div>
+                <TextField
+                  {...params}
+                  InputProps={{
+                    ...params.InputProps,
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SearchIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                  className="block w-full rounded-md bg-white border border-gray-300 shadow-sm !p-3  sm:text-sm"
+                  variant="standard"
+                  placeholder="Search Customer"
+                />
+              </div>
+            )}
+          />
+        </div>
+        <div className="text-[#305169] cursor-pointer">
+          <AddCircleOutlinedIcon fontSize="large" />
+        </div>
+      </div>
       <div className="rounded-lg overflow-hidden divide-gray-200">
         <table className="min-w-full divide-y">
           <thead className="bg-[#E75B4E] text-white">
