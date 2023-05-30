@@ -1,6 +1,5 @@
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import numWords from "num-words";
 
 // create a function to generate the PDF
 function generatePDF(bill) {

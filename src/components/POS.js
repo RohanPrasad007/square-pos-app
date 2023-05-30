@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import generatePDF from "../service/Invoice";
 import Loader from "./Loader";
+import { Dialog } from "@mui/material";
+import Alert from "./Alert";
 
 function POS() {
   const [items, setItems] = useState([
@@ -16,13 +18,13 @@ function POS() {
   const [loading, setLoading] = useState(false);
   const [activeRowIndex, setActiveRowIndex] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
+  const [openAlert, setOpenAlert] = useState(false);
 
   useEffect(() => {
     document.getElementById("cell-0-description").focus();
   }, []);
 
   const save = async () => {
-    alert("do you save");
     setLoading(true);
     items.pop();
     let [paymentLink, invoiceNo] = await window.api.makeOrder(items);
@@ -49,6 +51,7 @@ function POS() {
         amount: "",
       },
     ]);
+    setTotalAmount(0);
     setLoading(false);
   };
 
@@ -73,7 +76,7 @@ function POS() {
   const handleKeyPress = (e, rowIndex, field) => {
     if (e.key === "Enter") {
       if (field === "description" && e.target.value === "") {
-        save();
+        handleOpenAlert();
       } else {
         let nextRowIndex = rowIndex;
         let nextField = "";
@@ -164,6 +167,14 @@ function POS() {
         previousCell.focus();
       }
     }
+  };
+
+  const handleOpenAlert = () => {
+    setOpenAlert(true);
+  };
+
+  const handleCloseAlert = () => {
+    setOpenAlert(false);
   };
 
   return (
@@ -279,6 +290,17 @@ function POS() {
         </div>
       </div>
       {loading && <Loader />}
+      <Dialog
+        onClose={handleCloseAlert}
+        open={openAlert}
+        PaperProps={{
+          style: {
+            backgroundColor: "transparent",
+          },
+        }}
+      >
+        <Alert save={save} handleCloseAlert={handleCloseAlert} />
+      </Dialog>
     </div>
   );
 }
