@@ -106,7 +106,7 @@ const publicInvoice = async (invoiceId, version) => {
   }
 };
 
-const createInvoice = async (orderId) => {
+const createInvoice = async (orderId, customerId) => {
   const idempotencyKey = uuid();
 
   const today = new Date();
@@ -122,7 +122,7 @@ const createInvoice = async (orderId) => {
         locationId: "L5SQC39NFMN4G",
         orderId: orderId,
         primaryRecipient: {
-          customerId: "A1196FVKAYSA2F3ENCEF4HPVQC",
+          customerId: customerId,
         },
         paymentRequests: [
           {
@@ -152,7 +152,7 @@ const createInvoice = async (orderId) => {
   }
 };
 
-ipcMain.handle("makeOrder", async (event, invoice) => {
+ipcMain.handle("makeOrder", async (event, invoice, customerId) => {
   const idempotencyKey = uuid();
 
   const lineItem = [];
@@ -196,7 +196,7 @@ ipcMain.handle("makeOrder", async (event, invoice) => {
     const response = await client.ordersApi.createOrder({
       order: {
         locationId: "L5SQC39NFMN4G",
-        customerId: "A1196FVKAYSA2F3ENCEF4HPVQC",
+        customerId: customerId,
         lineItems: lineItem,
         discounts: discounts,
       },
@@ -204,9 +204,46 @@ ipcMain.handle("makeOrder", async (event, invoice) => {
     });
 
     const [paymentLink, invoiceNumber] = await createInvoice(
-      response.result.order.id
+      response.result.order.id,
+      customerId
     );
     return [paymentLink, invoiceNumber];
+  } catch (error) {
+    console.log(error);
+  }
+});
+ipcMain.handle("addCustomer", async (event, customer) => {
+  const idempotencyKey = uuid();
+  let note = {
+    vehicleNumber: customer.vehicleNumber,
+    vehicaleName: customer.vehicleName,
+  };
+  note = JSON.stringify(note);
+
+  try {
+    await client.customersApi.createCustomer({
+      idempotencyKey: idempotencyKey,
+      givenName: customer.name,
+      familyName: customer.name,
+      nickname: customer.name,
+      emailAddress: customer.email,
+      address: {
+        addressLine1: customer.address,
+        postalCode: customer.pincode,
+        country: "US",
+      },
+      phoneNumber: customer.phone,
+      note: note,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+ipcMain.handle("getCustomers", async () => {
+  try {
+    const response = await client.customersApi.listCustomers();
+    return response.result.customers;
   } catch (error) {
     console.log(error);
   }

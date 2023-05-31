@@ -5,6 +5,7 @@ import { Autocomplete, Dialog, InputAdornment, TextField } from "@mui/material";
 import Alert from "./Alert";
 import SearchIcon from "@mui/icons-material/Search";
 import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
+import AddCustomer from "./AddCustomer";
 
 function POS() {
   const [items, setItems] = useState([
@@ -21,42 +22,38 @@ function POS() {
   const [activeRowIndex, setActiveRowIndex] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
   const [openAlert, setOpenAlert] = useState(false);
+  const [openAddCustomer, setOpenAddCustomer] = useState(false);
   const [selectedCustomer, setSelectedCustomer] = useState(null);
-
-  const customers = [
-    {
-      name: "John",
-      last_name: "Doe",
-      phone: "123-456-7890",
-    },
-    {
-      name: "Jane",
-      last_name: "Smith",
-      phone: "987-654-3210",
-    },
-    {
-      name: "Alice",
-      last_name: "Johnson",
-      phone: "555-123-4567",
-    },
-  ];
+  const [customers, setCustomers] = useState([]);
 
   useEffect(() => {
+    getCustomers();
     document.getElementById("cell-0-description").focus();
   }, []);
+
+  const getCustomers = async () => {
+    setLoading(true);
+    const customers = await window.api.getCustomers();
+    setCustomers(customers);
+    setLoading(false);
+  };
 
   const save = async () => {
     setLoading(true);
     items.pop();
-    let [paymentLink, invoiceNo] = await window.api.makeOrder(items);
+    let [paymentLink, invoiceNo] = await window.api.makeOrder(
+      items,
+      selectedCustomer.id
+    );
+    const note = JSON.parse(selectedCustomer.note);
     const bill = {
       invoiceNo: invoiceNo,
       date: new Date(),
       customer: {
-        name: "Raj",
-        vehicleNo: "MH-12-1234",
-        vehicleModel: "Activa",
-        phoneNo: "9812345678",
+        name: selectedCustomer.givenName,
+        vehicleNo: note.vehicleNumber,
+        vehicleModel: note.vehicaleName,
+        phoneNo: selectedCustomer.phoneNumber,
       },
       items: items,
       payemntLink: paymentLink,
@@ -198,6 +195,14 @@ function POS() {
     setOpenAlert(false);
   };
 
+  const handleOpenAddCustomer = () => {
+    setOpenAddCustomer(true);
+  };
+
+  const handleCloseAddCustomer = () => {
+    setOpenAddCustomer(false);
+  };
+
   const handleCustomerChange = (event, value) => {
     setSelectedCustomer(value);
   };
@@ -210,7 +215,7 @@ function POS() {
             id="search-input"
             options={customers}
             getOptionLabel={(option) =>
-              `${option.name} ${option.last_name} - ${option.phone}`
+              `${option.givenName} - ${option.phoneNumber}`
             }
             value={selectedCustomer}
             onChange={handleCustomerChange}
@@ -234,7 +239,10 @@ function POS() {
             )}
           />
         </div>
-        <div className="text-[#305169] cursor-pointer">
+        <div
+          className="text-[#305169] cursor-pointer"
+          onClick={() => handleOpenAddCustomer()}
+        >
           <AddCircleOutlinedIcon fontSize="large" />
         </div>
       </div>
@@ -359,6 +367,23 @@ function POS() {
         }}
       >
         <Alert save={save} handleCloseAlert={handleCloseAlert} />
+      </Dialog>
+
+      <Dialog
+        onClose={handleCloseAddCustomer}
+        open={openAddCustomer}
+        PaperProps={{
+          style: {
+            backgroundColor: "transparent",
+          },
+        }}
+        maxWidth="lg"
+      >
+        <AddCustomer
+          handleCloseAddCustomer={handleCloseAddCustomer}
+          setLoading={setLoading}
+          getCustomers={getCustomers}
+        />
       </Dialog>
     </div>
   );
