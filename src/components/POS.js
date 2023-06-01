@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import generatePDF from "../service/Invoice";
-import Loader from "./Loader";
 import { Autocomplete, Dialog, InputAdornment, TextField } from "@mui/material";
 import Alert from "./Alert";
 import SearchIcon from "@mui/icons-material/Search";
 import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 import AddCustomer from "./AddCustomer";
 
-function POS() {
+function POS({ setLoading }) {
   const [items, setItems] = useState([
     {
       description: "",
@@ -18,7 +17,6 @@ function POS() {
       amount: "",
     },
   ]);
-  const [loading, setLoading] = useState(false);
   const [activeRowIndex, setActiveRowIndex] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
   const [openAlert, setOpenAlert] = useState(false);
@@ -62,7 +60,6 @@ function POS() {
     setItems([
       {
         description: "",
-        partNo: "",
         quantity: "",
         mrp: "",
         discount: "",
@@ -356,7 +353,6 @@ function POS() {
           <div>${totalAmount.toFixed(2)}</div>
         </div>
       </div>
-      {loading && <Loader />}
       <Dialog
         onClose={handleCloseAlert}
         open={openAlert}

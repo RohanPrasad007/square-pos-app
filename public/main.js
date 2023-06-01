@@ -248,3 +248,45 @@ ipcMain.handle("getCustomers", async () => {
     console.log(error);
   }
 });
+
+ipcMain.handle("getInvoices", async () => {
+  try {
+    const response = await client.invoicesApi.listInvoices("L5SQC39NFMN4G");
+    return response.result.invoices;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+ipcMain.handle("getCustomer", async (event, customerId) => {
+  try {
+    const response = await client.customersApi.retrieveCustomer(customerId);
+    return response.result.customer;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+ipcMain.handle("getOrder", async (event, orderId) => {
+  try {
+    const response = await client.ordersApi.retrieveOrder(orderId);
+
+    const items = [];
+
+    if (!response.result.order) {
+      response.result.order.lineItems.forEach((element) => {
+        const item = {
+          description: element.name,
+          quantity: parseInt(element.quantity),
+          mrp: parseInt(element.basePriceMoney.amount) / 100,
+          discount: parseInt(element.appliedDiscounts[0].discountUid),
+          amount: parseInt(element.totalMoney.amount) / 100,
+        };
+        items.push(item);
+      });
+    }
+    return items;
+  } catch (error) {
+    console.log(error);
+  }
+});
