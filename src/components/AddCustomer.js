@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function AddCustomer({ handleCloseAddCustomer, setLoading, getCustomers }) {
+function AddCustomer({ handleCloseAddCustomer, setLoading, addCustomerInPos }) {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [pincode, setPincode] = useState("");
@@ -12,7 +12,7 @@ function AddCustomer({ handleCloseAddCustomer, setLoading, getCustomers }) {
   const addCustomer = async () => {
     setLoading(true);
 
-    const customer = {
+    let customer = {
       name,
       address,
       pincode,
@@ -21,9 +21,9 @@ function AddCustomer({ handleCloseAddCustomer, setLoading, getCustomers }) {
       vehicleNumber,
       vehicleName,
     };
-    await window.api.addCustomer(customer);
+    customer = await window.api.addCustomer(customer);
+    addCustomerInPos(customer);
     setLoading(false);
-    getCustomers();
     handleCloseAddCustomer();
   };
   return (

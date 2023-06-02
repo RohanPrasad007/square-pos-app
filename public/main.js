@@ -221,7 +221,7 @@ ipcMain.handle("addCustomer", async (event, customer) => {
   note = JSON.stringify(note);
 
   try {
-    await client.customersApi.createCustomer({
+    const response = await client.customersApi.createCustomer({
       idempotencyKey: idempotencyKey,
       givenName: customer.name,
       familyName: customer.name,
@@ -235,6 +235,7 @@ ipcMain.handle("addCustomer", async (event, customer) => {
       phoneNumber: customer.phone,
       note: note,
     });
+    return response.result.customer;
   } catch (error) {
     console.log(error);
   }

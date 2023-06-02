@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import generatePDF from "../service/Invoice";
 import { Autocomplete, Dialog, InputAdornment, TextField } from "@mui/material";
 import Alert from "./Alert";
@@ -24,17 +24,22 @@ function POS({ setLoading }) {
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [customers, setCustomers] = useState([]);
 
-  const getCustomers = useCallback(async () => {
-    setLoading(true);
-    const customers = await window.api.getCustomers();
-    setCustomers(customers);
-    setLoading(false);
+  useEffect(() => {
+    const getData = async () => {
+      setLoading(true);
+      const customers = await window.api.getCustomers();
+      setCustomers(customers);
+      setLoading(false);
+    };
+    getData();
+    document.getElementById("cell-0-description").focus();
   }, [setLoading]);
 
-  useEffect(() => {
-    getCustomers();
-    document.getElementById("cell-0-description").focus();
-  }, [getCustomers]);
+  const addCustomerInPos = (customer) => {
+    const updatedCustomers = [...customers];
+    updatedCustomers.push(customer);
+    setCustomers(updatedCustomers);
+  };
 
   const save = async () => {
     setLoading(true);
@@ -378,7 +383,7 @@ function POS({ setLoading }) {
         <AddCustomer
           handleCloseAddCustomer={handleCloseAddCustomer}
           setLoading={setLoading}
-          getCustomers={getCustomers}
+          addCustomerInPos={addCustomerInPos}
         />
       </Dialog>
     </div>
