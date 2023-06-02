@@ -1,25 +1,6 @@
 ## App Overview
 
-The Electron app for the two-wheeler spare part shop is a project made for the Square Developer Hackathon 2023. It is a point-of-sale (POS) solution designed to streamline the billing process and improve customer transactions. It offers a user-friendly interface that enables quick and efficient bill creation and printing.
-
-## Key Features
-
-1. **Efficient Billing Process:** Users can enter item details such as description, MRP, and discounts for multiple items in the app. The app intelligently calculates the total bill amount, including any discounts applied.
-
-2. **Invoice Generation:** The app leverages the Square Invoice Publish API to generate professional invoices. It allows users to send invoices via email to customers, providing a convenient payment link within the invoice itself.
-
-3. **Square API Integration:** The app integrates with the Square ecosystem, utilizing the Square Customer API to securely store customer details. It also utilizes the Order and Invoice API to save and manage invoices efficiently.
-
-4. **Payment Convenience:** By including a payment link in the invoice, the app enables customers to conveniently make payments online. This feature helps the two-wheeler spare part shop owners receive payments promptly and efficiently.
-
-## Benefits
-
-The Electron app for the two-wheeler spare part shop offers several benefits to its users, including:
-
-- Time-saving: Users can quickly create and print bills, reducing manual effort and enhancing productivity.
-- Improved customer experience: The inclusion of a payment link in invoices enables customers to pay conveniently, leading to a smoother transaction process.
-- Streamlined billing: The app's integration with Square APIs automates the billing process, ensuring accuracy and reducing errors.
-- Increased efficiency: By leveraging the Square ecosystem and utilizing modern technologies, the app enhances overall operational efficiency for two-wheeler spare part shop owners.
+This Electron app for the two-wheeler spare part shop is a project made for the Square Developer Hackathon 2023. It is a point-of-sale (POS) solution designed to streamline the billing process and improve customer transactions. It offers a user-friendly interface that enables quick and efficient bill creation and printing.
 
 ## Getting Started
 
@@ -38,6 +19,7 @@ To install the app follow these steps:
 1. Clone the repository from [GitHub repository](https://github.com/RohanPrasad007/square-pos-app) to your local machine.
 2. Open a command prompt or terminal and navigate to the cloned repository's directory.
 3. Run the following command to install the necessary dependencies:
+   `npm install `
 4. Once the dependencies are installed, run the following command to start the Electron app:
    `npm run electron:serve `
 
@@ -55,7 +37,7 @@ The Point of Sale (POS) page in the Electron app is where users can create bills
 
 1. **Customer Selection**
 
-   - Search and select an existing customer: Enter the customer's name or phone nuber with country code in the input field to search for and select an existing customer from the database.
+   - Search and select an existing customer: Enter the customer's name or phone number with country code in the input field to search for and select an existing customer from the database.
    - Add a new customer: If the customer is not in the database, click the "Add Customer" button to create a new customer profile. Fill in the required details and save the customer information.
 
 2. **Item Entry**
@@ -178,16 +160,7 @@ These functions utilize the appropriate endpoints of the Square API to interact 
 
 Please refer to the Square API documentation for detailed information on each endpoint and its parameters.
 
-### Additional Resources
-
-For more details and documentation on the technologies and APIs used in the app, refer to the following resources:
-
-- [Electron Documentation](https://www.electronjs.org/docs)
-- [React Documentation](https://reactjs.org/docs)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [Square API Documentation](https://developer.squareup.com/docs)
-
-We hope this Developer Guide provides the necessary information for developers to understand and extend the functionality of the Electron app. If you have any further questions or need assistance, please refer to the Troubleshooting section or contact our support team.
+We hope this Developer Guide provides the necessary information for developers to understand and extend the functionality of the Electron app.
 
 ### Conclusion
 
@@ -203,7 +176,3 @@ In conclusion, the Electron app developed by Rohan Prasad and designed by Swapni
   - GitHub: [github.com/swapnilAngarkhe](https://github.com/swapnilAngarkhe)
 
 Rohan Prasad, as the developer, implemented the Electron framework along with React, Tailwind CSS, and the Square API to build the app's functionality. Swapnil Angarkhe, as the designer, contributed to the app's user interface and overall design aesthetic.
-
-The collaboration between Rohan and Swapnil resulted in a well-rounded application that combines technical expertise with a visually appealing and intuitive user experience.
-
-Overall, the Electron app showcases the power and flexibility of modern web technologies, enabling businesses to streamline their operations and efficiently manage customer interactions.
