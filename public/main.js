@@ -273,7 +273,7 @@ ipcMain.handle("getOrder", async (event, orderId) => {
 
     const items = [];
 
-    if (!response.result.order) {
+    if (response.result.order.lineItems !== undefined) {
       response.result.order.lineItems.forEach((element) => {
         const item = {
           description: element.name,
@@ -288,5 +288,6 @@ ipcMain.handle("getOrder", async (event, orderId) => {
     return items;
   } catch (error) {
     console.log(error);
+    return [];
   }
 });

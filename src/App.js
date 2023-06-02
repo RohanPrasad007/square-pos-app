@@ -5,13 +5,15 @@ import Home from "./components/Home";
 import Invioces from "./components/Invioces";
 import POS from "./components/POS";
 import Loader from "./components/Loader";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   const [loading, setLoading] = useState(false);
+
+  const defaultBasename = "/";
   return (
     <div>
-      <Router>
+      <Router basename={defaultBasename}>
         <Header />
         <Routes>
           <Route

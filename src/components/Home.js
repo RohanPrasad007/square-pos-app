@@ -11,7 +11,7 @@ function Home() {
         to="/pos"
         className="text-2xl text-black flex flex-col justify-evenly items-center bg-gray-100 w-40 h-40 rounded-2xl shadow-md transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:border-[#E75B4E] hover:border-2"
       >
-        <img src="./assets/pos.svg" alt="POS" className="w-24 h-24" />
+        <img src="./assets/POS.svg" alt="POS" className="w-24 h-24" />
         POS
       </Link>
       <Link

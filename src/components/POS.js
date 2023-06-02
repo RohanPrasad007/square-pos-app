@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import generatePDF from "../service/Invoice";
 import { Autocomplete, Dialog, InputAdornment, TextField } from "@mui/material";
 import Alert from "./Alert";
@@ -24,17 +24,17 @@ function POS({ setLoading }) {
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [customers, setCustomers] = useState([]);
 
-  useEffect(() => {
-    getCustomers();
-    document.getElementById("cell-0-description").focus();
-  }, []);
-
-  const getCustomers = async () => {
+  const getCustomers = useCallback(async () => {
     setLoading(true);
     const customers = await window.api.getCustomers();
     setCustomers(customers);
     setLoading(false);
-  };
+  }, [setLoading]);
+
+  useEffect(() => {
+    getCustomers();
+    document.getElementById("cell-0-description").focus();
+  }, [getCustomers]);
 
   const save = async () => {
     setLoading(true);

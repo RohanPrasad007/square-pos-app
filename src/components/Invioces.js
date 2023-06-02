@@ -12,7 +12,7 @@ function Invioces({ setLoading }) {
       setLoading(false);
     };
     getDate();
-  }, []);
+  }, [setLoading]);
 
   const print = async (invoice) => {
     setLoading(true);
