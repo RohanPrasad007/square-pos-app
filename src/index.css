@@ -33,3 +33,13 @@ code {
     transform: translate(-50%, -50%) rotate(3600deg);
   }
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}

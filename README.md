@@ -1,70 +1,209 @@
-# Getting Started with Create React App
+## App Overview
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The Electron app for the two-wheeler spare part shop is a project made for the Square Developer Hackathon 2023. It is a point-of-sale (POS) solution designed to streamline the billing process and improve customer transactions. It offers a user-friendly interface that enables quick and efficient bill creation and printing.
 
-## Available Scripts
+## Key Features
 
-In the project directory, you can run:
+1. **Efficient Billing Process:** Users can enter item details such as description, MRP, and discounts for multiple items in the app. The app intelligently calculates the total bill amount, including any discounts applied.
 
-### `npm start`
+2. **Invoice Generation:** The app leverages the Square Invoice Publish API to generate professional invoices. It allows users to send invoices via email to customers, providing a convenient payment link within the invoice itself.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+3. **Square API Integration:** The app integrates with the Square ecosystem, utilizing the Square Customer API to securely store customer details. It also utilizes the Order and Invoice API to save and manage invoices efficiently.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+4. **Payment Convenience:** By including a payment link in the invoice, the app enables customers to conveniently make payments online. This feature helps the two-wheeler spare part shop owners receive payments promptly and efficiently.
 
-### `npm test`
+## Benefits
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The Electron app for the two-wheeler spare part shop offers several benefits to its users, including:
 
-### `npm run build`
+- Time-saving: Users can quickly create and print bills, reducing manual effort and enhancing productivity.
+- Improved customer experience: The inclusion of a payment link in invoices enables customers to pay conveniently, leading to a smoother transaction process.
+- Streamlined billing: The app's integration with Square APIs automates the billing process, ensuring accuracy and reducing errors.
+- Increased efficiency: By leveraging the Square ecosystem and utilizing modern technologies, the app enhances overall operational efficiency for two-wheeler spare part shop owners.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To install the app follow these steps:
 
-### `npm run eject`
+#### Option 1: Download the Installation Package
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Download the installation package for the app from the provided Google Drive link [Link](https://drive.google.com/file/d/1NoLAMuDGUo-0INGfZ2xFUCRfGDOGsZmO/view?usp=sharing).
+2. Locate the downloaded file and double-click it to start the installation process.
+3. Follow the on-screen instructions to complete the installation.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Option 2: Clone the Repository and Run the Command
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Clone the repository from [GitHub repository](https://github.com/RohanPrasad007/square-pos-app) to your local machine.
+2. Open a command prompt or terminal and navigate to the cloned repository's directory.
+3. Run the following command to install the necessary dependencies:
+4. Once the dependencies are installed, run the following command to start the Electron app:
+   `npm run electron:serve `
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### System Requirements
 
-## Learn More
+The Electron app is designed for Windows operating systems.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Note: Please ensure that you have a stable internet connection during app usage for seamless integration with the Square ecosystem.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## User Guide
 
-### Code Splitting
+### Point of Sale (POS) Page
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The Point of Sale (POS) page in the Electron app is where users can create bills and manage customer details. Follow these steps to use the POS functionality effectively:
 
-### Analyzing the Bundle Size
+1. **Customer Selection**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+   - Search and select an existing customer: Enter the customer's name or phone nuber with country code in the input field to search for and select an existing customer from the database.
+   - Add a new customer: If the customer is not in the database, click the "Add Customer" button to create a new customer profile. Fill in the required details and save the customer information.
 
-### Making a Progressive Web App
+2. **Item Entry**
+   - Enter item details: In the table below, enter the item description, MRP, and any applicable discounts.
+   - Move between fields: Press Enter to move to the next field after entering the description or other item details.
+   - Save the invoice: Once all items are added, navigate to the last row and leave the description input field empty. Press Enter to open a dialogue asking if you want to save the invoice. Press "Yes" or use the shortcut (e.g., press "Y") to save the invoice and generate a PDF for printing.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Invoice Page
 
-### Advanced Configuration
+The Invoice page allows users to manage and print invoices. Follow these steps to utilize the Invoice page effectively:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+1. **View Invoice List**
 
-### Deployment
+   - Access the Invoice page: Navigate to the Invoice page from the main menu.
+   - View all invoices: The Invoice page displays a list of all invoices generated using the app.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+2. **Print Invoice**
+   - Select an invoice: Choose the desired invoice from the list.
+   - Print the invoice: Click the "Print" button associated with the selected invoice. The invoice PDF will open, ready for printing.
 
-### `npm run build` fails to minify
+### Video Demo
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+For a visual walkthrough of the app's functionality, watch the YouTube video demo available at the following link: [YouTube Video Demo](https://youtu.be/dQw4w9WgXcQ)
+
+We hope this User Guide helps you effectively utilize the features of the Electron app.
+
+## Developer Guide
+
+The Developer Guide section provides information and guidelines for developers who want to understand and extend your Electron app's functionality.
+
+### Technologies and Frameworks Used
+
+- Electron
+- React
+- Tailwind CSS
+- Square API
+- jsPDF
+
+### Prerequisites
+
+Before working with the app's source code, ensure that you have the following:
+
+- Node.js installed on your development machine.
+
+### Codebase Structure
+
+The codebase of the Electron app is structured as follows:
+
+- **public** folder:
+
+  - **main.js**: The main file of the Electron app.
+  - **preload.js**: Contains preload code for Electron.
+
+- **src** folder:
+  - **App.js**: The main React app file.
+  - **components**: Contains reusable React components used in the app, including:
+    - AddCustomer.js
+    - Alert.js
+    - Header.js
+    - Invoices.js
+    - Loader.js
+    - POS.js
+  - **service**: Contains the `Invoice.js` file, which includes code to generate PDF invoices using jsPDF.
+
+### Square API Integration
+
+The Electron app integrates with the Square API to provide various functionalities related to managing customers, creating orders, and generating invoices. The following Square API endpoints are utilized in the application:
+
+#### Create Invoice
+
+The `createInvoice` function is used to create an invoice for a given order and customer. It performs the following steps:
+
+1. Generates a unique idempotency key using the `uuid` library.
+2. Calculates the invoice number and the due date for the invoice.
+3. Calls the `createInvoice` endpoint of the Square API with the necessary invoice data, including the location, order, customer, payment requests, delivery method, invoice number, and accepted payment methods.
+4. Retrieves the payment link for the created invoice using the `publicInvoice` function.
+5. Returns the payment link and invoice number.
+
+#### Create Order
+
+The `makeOrder` function is responsible for creating an order with line items and discounts. It follows these steps:
+
+1. Generates a unique idempotency key using the `uuid` library.
+2. Processes each item in the invoice and applies discounts if available.
+3. Constructs the line items array with information such as the item name, quantity, metadata, applied discounts, and base price.
+4. Calls the `createOrder` endpoint of the Square API with the location, customer ID, line items, and discounts.
+5. Invokes the `createInvoice` function to generate an invoice and retrieve the payment link and invoice number.
+6. Returns the payment link and invoice number.
+
+#### Add Customer
+
+The `addCustomer` function is used to create a new customer in the Square API. It performs the following steps:
+
+1. Generates a unique idempotency key using the `uuid` library.
+2. Constructs a JSON object for the customer's note based on the provided information.
+3. Calls the `createCustomer` endpoint of the Square API with the necessary customer data, including the idempotency key, name, email address, address, phone number, and note.
+4. Returns the created customer object.
+
+#### Get Customers
+
+The `getCustomers` function retrieves a list of all customers from the Square API. It performs a simple call to the `listCustomers` endpoint and returns the list of customers.
+
+#### Get Invoices
+
+The `getInvoices` function fetches a list of invoices from the Square API. It calls the `listInvoices` endpoint with the appropriate location ID and returns the list of invoices.
+
+#### Get Customer
+
+The `getCustomer` function retrieves a specific customer from the Square API based on the provided customer ID. It calls the `retrieveCustomer` endpoint and returns the customer object.
+
+#### Get Order
+
+The `getOrder` function fetches the details of a specific order from the Square API based on the provided order ID. It performs the following steps:
+
+1. Calls the `retrieveOrder` endpoint of the Square API with the order ID.
+2. Parses the line items from the order response and constructs an array of items containing the description, quantity, MRP, discount, and amount.
+3. Returns the array of items.
+
+These functions utilize the appropriate endpoints of the Square API to interact with customer data, create orders, and generate invoices within the Electron app.
+
+Please refer to the Square API documentation for detailed information on each endpoint and its parameters.
+
+### Additional Resources
+
+For more details and documentation on the technologies and APIs used in the app, refer to the following resources:
+
+- [Electron Documentation](https://www.electronjs.org/docs)
+- [React Documentation](https://reactjs.org/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Square API Documentation](https://developer.squareup.com/docs)
+
+We hope this Developer Guide provides the necessary information for developers to understand and extend the functionality of the Electron app. If you have any further questions or need assistance, please refer to the Troubleshooting section or contact our support team.
+
+### Conclusion
+
+In conclusion, the Electron app developed by Rohan Prasad and designed by Swapnil Angarkhe provides a user-friendly interface for managing customers, creating orders, and generating invoices. The app seamlessly integrates with the Square API to leverage its powerful features and capabilities.
+
+**Authors:**
+
+- Rohan Prasad
+
+  - GitHub: [github.com/RohanPrasad007](https://github.com/RohanPrasad007)
+
+- Swapnil Angarkhe
+  - GitHub: [github.com/swapnilAngarkhe](https://github.com/swapnilAngarkhe)
+
+Rohan Prasad, as the developer, implemented the Electron framework along with React, Tailwind CSS, and the Square API to build the app's functionality. Swapnil Angarkhe, as the designer, contributed to the app's user interface and overall design aesthetic.
+
+The collaboration between Rohan and Swapnil resulted in a well-rounded application that combines technical expertise with a visually appealing and intuitive user experience.
+
+Overall, the Electron app showcases the power and flexibility of modern web technologies, enabling businesses to streamline their operations and efficiently manage customer interactions.
