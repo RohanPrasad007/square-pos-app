@@ -60,7 +60,7 @@ The Invoice page allows users to manage and print invoices. Follow these steps t
 
 ### Video Demo
 
-For a visual walkthrough of the app's functionality, watch the YouTube video demo available at the following link: [YouTube Video Demo](https://youtu.be/dQw4w9WgXcQ)
+For a visual walkthrough of the app's functionality, watch the YouTube video demo available at the following link: [YouTube Video Demo](https://youtu.be/2Rw0pV6tBKU)
 
 We hope this User Guide helps you effectively utilize the features of the Electron app.
 
