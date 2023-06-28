@@ -6,7 +6,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 import AddCustomer from "./AddCustomer";
 
-function POS({ setLoading }) {
+function POS({ setLoading, showError }) {
   const [items, setItems] = useState([
     {
       description: "",
@@ -384,6 +384,7 @@ function POS({ setLoading }) {
           handleCloseAddCustomer={handleCloseAddCustomer}
           setLoading={setLoading}
           addCustomerInPos={addCustomerInPos}
+          showError={showError}
         />
       </Dialog>
     </div>

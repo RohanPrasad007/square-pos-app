@@ -10,7 +10,7 @@ To install the app follow these steps:
 
 #### Option 1: Download the Installation Package
 
-1. Download the installation package for the app from the provided Google Drive link [Link](https://drive.google.com/file/d/1NoLAMuDGUo-0INGfZ2xFUCRfGDOGsZmO/view?usp=sharing).
+1. Download the installation package for the app from the provided Google Drive link [Link](https://drive.google.com/drive/folders/1GtJczdnv2a4ow3avEk703qfMclQX_KUR?usp=sharing).
 2. Locate the downloaded file and double-click it to start the installation process.
 3. Follow the on-screen instructions to complete the installation.
 

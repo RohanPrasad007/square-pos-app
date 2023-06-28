@@ -1,16 +1,39 @@
 import React, { useState } from "react";
 
-function AddCustomer({ handleCloseAddCustomer, setLoading, addCustomerInPos }) {
+function AddCustomer({
+  handleCloseAddCustomer,
+  setLoading,
+  addCustomerInPos,
+  showError,
+}) {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [pincode, setPincode] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState("+91");
   const [email, setEmail] = useState("");
   const [vehicleNumber, setVehicleNumber] = useState("");
   const [vehicleName, setVehicleName] = useState("");
 
   const addCustomer = async () => {
     setLoading(true);
+
+    if (
+      name === "" ||
+      phone === "" ||
+      email === "" ||
+      vehicleNumber === "" ||
+      vehicleName === ""
+    ) {
+      setLoading(false);
+      showError("Please fill all the required fields");
+      return;
+    }
+
+    const regex = /^[+][9][1]\d{10}$/;
+    if (!regex.test(phone)) {
+      showError("Invalid mobile number");
+      return;
+    }
 
     let customer = {
       name,
